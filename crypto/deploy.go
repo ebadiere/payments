@@ -46,12 +46,12 @@ func DeployConfigContract(privkey string, client *ethclient.Client) (common.Addr
 		return tx.WithSignature(signer, sig)
 	}
 
-	_, _, _, err = bindings.DeployConfig(auth, client)
+	addr, _, _, err := bindings.DeployConfig(auth, client)
 	if err != nil {
 		return common.Address{}, fmt.Errorf("failed to deploy config contract: %w", err)
 	}
 
-	return common.HexToAddress(staticConfigAddress), nil
+	return addr, nil
 }
 
 // SetupConfig adds required configuration options to the deployed config.
