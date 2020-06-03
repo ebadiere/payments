@@ -17,10 +17,12 @@ import (
 )
 
 const (
-	staticDeployer      = "0x5B501f5dB54A1652F2f58B4bE7aaDAA117dCE622"
-	staticSignature     = "0xffb2d0383ab970139a7e0fa9263c446199464b5778b92bf9e7936b5a383a8fd00abababababababababababababababababababababababababababababababa00"
-	staticConfigAddress = "0x46e9742C098267122DA466d6b7a3fb844436Ac37"
+	staticDeployer  = "0x5B501f5dB54A1652F2f58B4bE7aaDAA117dCE622"
+	staticSignature = "0xffb2d0383ab970139a7e0fa9263c446199464b5778b92bf9e7936b5a383a8fd00abababababababababababababababababababababababababababababababa00"
+	// staticConfigAddress = "0x46e9742C098267122DA466d6b7a3fb844436Ac37"
 )
+
+var configAddress common.Address
 
 // DeployConfigContract deploys config contract.
 // It requires manually transaction build to make sure we are always deploying to the exact address.
@@ -46,18 +48,18 @@ func DeployConfigContract(privkey string, client *ethclient.Client) (common.Addr
 		return tx.WithSignature(signer, sig)
 	}
 
-	_, _, _, err = bindings.DeployConfig(auth, client)
+	configAddress, _, _, err = bindings.DeployConfig(auth, client)
 	if err != nil {
 		return common.Address{}, fmt.Errorf("failed to deploy config contract: %w", err)
 	}
 
-	return common.HexToAddress(staticConfigAddress), nil
+	return common.HexToAddress(configAddress), nil
 }
 
 // SetupConfig adds required configuration options to the deployed config.
 // It sets config owner, channel implementation and accountant implementation addresses.
 func SetupConfig(opts *bind.TransactOpts, client bind.ContractBackend, owner string, channelImplProxyAddress, channelImplAddress, accountantImplAddress, accountantImplProxyAddress common.Address) error {
-	cfg, err := bindings.NewConfig(common.HexToAddress(staticConfigAddress), client)
+	cfg, err := bindings.NewConfig(common.HexToAddress(configAddress), client)
 	if err != nil {
 		return fmt.Errorf("failed to get config by provided address: %w", err)
 	}
@@ -74,7 +76,7 @@ func SetupConfig(opts *bind.TransactOpts, client bind.ContractBackend, owner str
 	}
 
 	_, err = cfg.AddConfig(opts, bytes32(common.FromHex("0x48df65c92c1c0e8e19a219c69bfeb4cf7c1c123e0c266d555abb508d37c6d96e")),
-		bytes32(channelImplProxyAddress.Hash().Bytes()))
+		bytes32(channelImplAddress.Hash().Bytes()))
 	if err != nil {
 		return fmt.Errorf("failed to add channel implementation proxy to config: %w", err)
 	}
@@ -86,7 +88,7 @@ func SetupConfig(opts *bind.TransactOpts, client bind.ContractBackend, owner str
 	}
 
 	_, err = cfg.AddConfig(opts, bytes32(common.FromHex("0x52948fa93a94851571e57fddc2be83c51e0a64bb5e9ca55f4f90439b9802b575")),
-		bytes32(accountantImplProxyAddress.Hash().Bytes()))
+		bytes32(accountantImplAddress.Hash().Bytes()))
 	if err != nil {
 		return fmt.Errorf("failed to add accountant implementation proxy to config: %w", err)
 	}
