@@ -56,8 +56,8 @@ func DeployConfigContract(privkey string, client *ethclient.Client) (common.Addr
 
 // SetupConfig adds required configuration options to the deployed config.
 // It sets config owner, channel implementation and accountant implementation addresses.
-func SetupConfig(opts *bind.TransactOpts, client bind.ContractBackend, owner string, channelImplProxyAddress, channelImplAddress, accountantImplAddress, accountantImplProxyAddress common.Address) error {
-	cfg, err := bindings.NewConfig(common.HexToAddress(staticConfigAddress), client)
+func SetupConfig(opts *bind.TransactOpts, configAddress common.Address, client bind.ContractBackend, owner string, channelImplProxyAddress, channelImplAddress, accountantImplAddress, accountantImplProxyAddress common.Address) error {
+	cfg, err := bindings.NewConfig(configAddress, client)
 	if err != nil {
 		return fmt.Errorf("failed to get config by provided address: %w", err)
 	}
