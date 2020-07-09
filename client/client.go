@@ -18,6 +18,7 @@ package client
 
 import (
 	"context"
+	"encoding/hex"
 	"fmt"
 	"math/big"
 	"strings"
@@ -554,6 +555,21 @@ func (bc *Blockchain) SettleAndRebalance(req SettleAndRebalanceRequest) (*types.
 		return nil, errors.Wrap(err, "could not get nonce")
 	}
 
+	fmt.Println("INPUT ")
+	fmt.Println("HERMES ", req.HermesID.Hex())
+	fmt.Println("provider ", req.ProviderID.Hex())
+
+	fmt.Println("PR")
+	fmt.Println("Amount", req.Promise.Amount)
+	fmt.Println("FEE", req.Promise.Fee)
+	fmt.Println("CHID", hex.EncodeToString(req.Promise.ChannelID))
+	fmt.Println("HASHLOCK", hex.EncodeToString(req.Promise.Hashlock))
+	fmt.Println("R", hex.EncodeToString(req.Promise.R))
+	fmt.Println("SIGNATURE", hex.EncodeToString(req.Promise.Signature))
+
+	rbytes := toBytes32(req.Promise.R)
+	fmt.Println("RBYTES", hex.EncodeToString(rbytes[:]))
+
 	return transactor.SettleAndRebalance(&bind.TransactOpts{
 		From:     req.Identity,
 		Signer:   req.Signer,
@@ -565,7 +581,7 @@ func (bc *Blockchain) SettleAndRebalance(req SettleAndRebalanceRequest) (*types.
 		req.ProviderID,
 		big.NewInt(0).SetUint64(req.Promise.Amount),
 		big.NewInt(0).SetUint64(req.Promise.Fee),
-		toBytes32(req.Promise.R),
+		rbytes,
 		req.Promise.Signature,
 	)
 }
