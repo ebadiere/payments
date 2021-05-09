@@ -20,7 +20,9 @@
 package bindings
 
 import (
+	"log"
 	"math/big"
+	"os"
 	"strings"
 
 	ethereum "github.com/ethereum/go-ethereum"
@@ -177,7 +179,12 @@ func bindIUniswapV2Router01(address common.Address, caller bind.ContractCaller, 
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_IUniswapV2Router01 *IUniswapV2Router01Raw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _IUniswapV2Router01.Contract.IUniswapV2Router01Caller.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _IUniswapV2Router01.Contract.IUniswapV2Router01Caller.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -196,7 +203,12 @@ func (_IUniswapV2Router01 *IUniswapV2Router01Raw) Transact(opts *bind.TransactOp
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_IUniswapV2Router01 *IUniswapV2Router01CallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _IUniswapV2Router01.Contract.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _IUniswapV2Router01.Contract.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -217,8 +229,12 @@ func (_IUniswapV2Router01 *IUniswapV2Router01Caller) WETH(opts *bind.CallOpts) (
 	var (
 		ret0 = new(common.Address)
 	)
-	out := ret0
-	err := _IUniswapV2Router01.contract.Call(opts, out, "WETH")
+
+	t := []common.Address{*ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _IUniswapV2Router01.contract.Call(opts, &out, "WETH")
 	return *ret0, err
 }
 
@@ -243,8 +259,12 @@ func (_IUniswapV2Router01 *IUniswapV2Router01Caller) Factory(opts *bind.CallOpts
 	var (
 		ret0 = new(common.Address)
 	)
-	out := ret0
-	err := _IUniswapV2Router01.contract.Call(opts, out, "factory")
+
+	t := []common.Address{*ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _IUniswapV2Router01.contract.Call(opts, &out, "factory")
 	return *ret0, err
 }
 
@@ -269,8 +289,12 @@ func (_IUniswapV2Router01 *IUniswapV2Router01Caller) GetAmountIn(opts *bind.Call
 	var (
 		ret0 = new(*big.Int)
 	)
-	out := ret0
-	err := _IUniswapV2Router01.contract.Call(opts, out, "getAmountIn", amountOut, reserveIn, reserveOut)
+
+	t := []big.Int{**ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _IUniswapV2Router01.contract.Call(opts, &out, "getAmountIn", amountOut, reserveIn, reserveOut)
 	return *ret0, err
 }
 
@@ -295,8 +319,12 @@ func (_IUniswapV2Router01 *IUniswapV2Router01Caller) GetAmountOut(opts *bind.Cal
 	var (
 		ret0 = new(*big.Int)
 	)
-	out := ret0
-	err := _IUniswapV2Router01.contract.Call(opts, out, "getAmountOut", amountIn, reserveIn, reserveOut)
+
+	t := []big.Int{**ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _IUniswapV2Router01.contract.Call(opts, &out, "getAmountOut", amountIn, reserveIn, reserveOut)
 	return *ret0, err
 }
 
@@ -321,8 +349,12 @@ func (_IUniswapV2Router01 *IUniswapV2Router01Caller) GetAmountsIn(opts *bind.Cal
 	var (
 		ret0 = new([]*big.Int)
 	)
-	out := ret0
-	err := _IUniswapV2Router01.contract.Call(opts, out, "getAmountsIn", amountOut, path)
+
+	var t interface{} = ret0
+	out := make([]interface{}, len(*ret0))
+	out[0] = t
+
+	err := _IUniswapV2Router01.contract.Call(opts, &out, "getAmountsIn", amountOut, path)
 	return *ret0, err
 }
 
@@ -347,8 +379,12 @@ func (_IUniswapV2Router01 *IUniswapV2Router01Caller) GetAmountsOut(opts *bind.Ca
 	var (
 		ret0 = new([]*big.Int)
 	)
-	out := ret0
-	err := _IUniswapV2Router01.contract.Call(opts, out, "getAmountsOut", amountIn, path)
+
+	var t interface{} = ret0
+	out := make([]interface{}, len(*ret0))
+	out[0] = t
+
+	err := _IUniswapV2Router01.contract.Call(opts, &out, "getAmountsOut", amountIn, path)
 	return *ret0, err
 }
 
@@ -373,8 +409,12 @@ func (_IUniswapV2Router01 *IUniswapV2Router01Caller) Quote(opts *bind.CallOpts, 
 	var (
 		ret0 = new(*big.Int)
 	)
-	out := ret0
-	err := _IUniswapV2Router01.contract.Call(opts, out, "quote", amountA, reserveA, reserveB)
+
+	t := []big.Int{**ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _IUniswapV2Router01.contract.Call(opts, &out, "quote", amountA, reserveA, reserveB)
 	return *ret0, err
 }
 
@@ -763,7 +803,12 @@ func bindIWETH(address common.Address, caller bind.ContractCaller, transactor bi
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_IWETH *IWETHRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _IWETH.Contract.IWETHCaller.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _IWETH.Contract.IWETHCaller.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -782,7 +827,12 @@ func (_IWETH *IWETHRaw) Transact(opts *bind.TransactOpts, method string, params 
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_IWETH *IWETHCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _IWETH.Contract.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _IWETH.Contract.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -988,7 +1038,12 @@ func bindTransferHelper(address common.Address, caller bind.ContractCaller, tran
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_TransferHelper *TransferHelperRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _TransferHelper.Contract.TransferHelperCaller.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _TransferHelper.Contract.TransferHelperCaller.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -1007,7 +1062,12 @@ func (_TransferHelper *TransferHelperRaw) Transact(opts *bind.TransactOpts, meth
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_TransferHelper *TransferHelperCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _TransferHelper.Contract.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _TransferHelper.Contract.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -1150,7 +1210,13 @@ func bindUniswapV2Library(address common.Address, caller bind.ContractCaller, tr
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_UniswapV2Library *UniswapV2LibraryRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _UniswapV2Library.Contract.UniswapV2LibraryCaller.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+
+	return _UniswapV2Library.Contract.UniswapV2LibraryCaller.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -1169,7 +1235,12 @@ func (_UniswapV2Library *UniswapV2LibraryRaw) Transact(opts *bind.TransactOpts, 
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_UniswapV2Library *UniswapV2LibraryCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _UniswapV2Library.Contract.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _UniswapV2Library.Contract.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -1335,7 +1406,12 @@ func bindUniswapV2Router01(address common.Address, caller bind.ContractCaller, t
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_UniswapV2Router01 *UniswapV2Router01Raw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _UniswapV2Router01.Contract.UniswapV2Router01Caller.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _UniswapV2Router01.Contract.UniswapV2Router01Caller.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -1354,7 +1430,12 @@ func (_UniswapV2Router01 *UniswapV2Router01Raw) Transact(opts *bind.TransactOpts
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_UniswapV2Router01 *UniswapV2Router01CallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _UniswapV2Router01.Contract.contract.Call(opts, result, method, params...)
+	result, ok := result.(*[]interface{})
+	if !ok {
+		log.Printf("got data of type %T but wanted int", result)
+		os.Exit(1)
+	}
+	return _UniswapV2Router01.Contract.contract.Call(opts, result.(*[]interface{}), method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -1375,8 +1456,11 @@ func (_UniswapV2Router01 *UniswapV2Router01Caller) WETH(opts *bind.CallOpts) (co
 	var (
 		ret0 = new(common.Address)
 	)
-	out := ret0
-	err := _UniswapV2Router01.contract.Call(opts, out, "WETH")
+
+	t := []common.Address{*ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+	err := _UniswapV2Router01.contract.Call(opts, &out, "WETH")
 	return *ret0, err
 }
 
@@ -1401,8 +1485,12 @@ func (_UniswapV2Router01 *UniswapV2Router01Caller) Factory(opts *bind.CallOpts) 
 	var (
 		ret0 = new(common.Address)
 	)
-	out := ret0
-	err := _UniswapV2Router01.contract.Call(opts, out, "factory")
+
+	t := []common.Address{*ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _UniswapV2Router01.contract.Call(opts, &out, "factory")
 	return *ret0, err
 }
 
@@ -1427,8 +1515,12 @@ func (_UniswapV2Router01 *UniswapV2Router01Caller) GetAmountIn(opts *bind.CallOp
 	var (
 		ret0 = new(*big.Int)
 	)
-	out := ret0
-	err := _UniswapV2Router01.contract.Call(opts, out, "getAmountIn", amountOut, reserveIn, reserveOut)
+
+	t := []big.Int{**ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _UniswapV2Router01.contract.Call(opts, &out, "getAmountIn", amountOut, reserveIn, reserveOut)
 	return *ret0, err
 }
 
@@ -1453,8 +1545,12 @@ func (_UniswapV2Router01 *UniswapV2Router01Caller) GetAmountOut(opts *bind.CallO
 	var (
 		ret0 = new(*big.Int)
 	)
-	out := ret0
-	err := _UniswapV2Router01.contract.Call(opts, out, "getAmountOut", amountIn, reserveIn, reserveOut)
+
+	t := []big.Int{**ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _UniswapV2Router01.contract.Call(opts, &out, "getAmountOut", amountIn, reserveIn, reserveOut)
 	return *ret0, err
 }
 
@@ -1479,8 +1575,12 @@ func (_UniswapV2Router01 *UniswapV2Router01Caller) GetAmountsIn(opts *bind.CallO
 	var (
 		ret0 = new([]*big.Int)
 	)
-	out := ret0
-	err := _UniswapV2Router01.contract.Call(opts, out, "getAmountsIn", amountOut, path)
+
+	var t interface{} = ret0
+	out := make([]interface{}, len(*ret0))
+	out[0] = t
+
+	err := _UniswapV2Router01.contract.Call(opts, &out, "getAmountsIn", amountOut, path)
 	return *ret0, err
 }
 
@@ -1505,8 +1605,12 @@ func (_UniswapV2Router01 *UniswapV2Router01Caller) GetAmountsOut(opts *bind.Call
 	var (
 		ret0 = new([]*big.Int)
 	)
-	out := ret0
-	err := _UniswapV2Router01.contract.Call(opts, out, "getAmountsOut", amountIn, path)
+
+	var t interface{} = ret0
+	out := make([]interface{}, len(*ret0))
+	out[0] = t
+
+	err := _UniswapV2Router01.contract.Call(opts, &out, "getAmountsOut", amountIn, path)
 	return *ret0, err
 }
 
@@ -1531,8 +1635,12 @@ func (_UniswapV2Router01 *UniswapV2Router01Caller) Quote(opts *bind.CallOpts, am
 	var (
 		ret0 = new(*big.Int)
 	)
-	out := ret0
-	err := _UniswapV2Router01.contract.Call(opts, out, "quote", amountA, reserveA, reserveB)
+
+	t := []big.Int{**ret0}
+	out := make([]interface{}, len(t))
+	out[0] = t[0]
+
+	err := _UniswapV2Router01.contract.Call(opts, &out, "quote", amountA, reserveA, reserveB)
 	return *ret0, err
 }
 

@@ -74,7 +74,7 @@ func (a *API) GetBlockIncludedResponse(block *big.Int) (BlockIncludedResponse, e
 	if err != nil {
 		return res, err
 	}
-	
+
 	if res.Error {
 		return res, ErrBlockNotIncluded
 	}
