@@ -1,4 +1,4 @@
-module github.com/mysteriumnetwork/payments
+module github.com/ebadiere/payments
 
 go 1.13
 

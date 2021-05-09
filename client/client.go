@@ -29,9 +29,9 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/event"
-	"github.com/mysteriumnetwork/payments/bindings"
-	"github.com/mysteriumnetwork/payments/bindings/rewarder"
-	"github.com/mysteriumnetwork/payments/crypto"
+	"github.com/ebadiere/payments/bindings"
+	"github.com/ebadiere/payments/bindings/rewarder"
+	"github.com/ebadiere/payments/crypto"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
 )

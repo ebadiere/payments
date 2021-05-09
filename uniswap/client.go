@@ -25,7 +25,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/mysteriumnetwork/payments/uniswap/bindings"
+	"github.com/ebadiere/payments/uniswap/bindings"
 )
 
 // Client allows to do operations on uniswap smart contracts.

@@ -25,7 +25,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/mysteriumnetwork/payments/bindings"
+	"github.com/ebadiere/payments/bindings"
 	"github.com/pkg/errors"
 )
 

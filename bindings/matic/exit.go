@@ -19,7 +19,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethdb/memorydb"
 	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/ethereum/go-ethereum/trie"
-	pc "github.com/mysteriumnetwork/payments/crypto"
+	pc "github.com/ebadiere/payments/crypto"
 )
 
 // GetExitParams gets the exit params for matic exit.
