@@ -20,9 +20,9 @@ import (
 	"math/big"
 	"strings"
 
+	"github.com/ebadiere/payments/crypto"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ebadiere/payments/crypto"
 )
 
 // Request represent a request to register

@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	pc "github.com/ebadiere/payments/crypto"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -19,7 +20,6 @@ import (
 	"github.com/ethereum/go-ethereum/ethdb/memorydb"
 	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/ethereum/go-ethereum/trie"
-	pc "github.com/ebadiere/payments/crypto"
 )
 
 // GetExitParams gets the exit params for matic exit.

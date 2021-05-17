@@ -103,3 +103,5 @@ func GetPathPairs(tokens []common.Address) []Pair {
 
 	return pairs
 }
+
+// implement getOutputAmount

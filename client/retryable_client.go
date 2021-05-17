@@ -21,10 +21,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ebadiere/payments/bindings"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ebadiere/payments/bindings"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
 )

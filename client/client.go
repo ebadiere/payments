@@ -23,15 +23,15 @@ import (
 	"strings"
 	"time"
 
+	"github.com/ebadiere/payments/bindings"
+	"github.com/ebadiere/payments/bindings/rewarder"
+	"github.com/ebadiere/payments/crypto"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/event"
-	"github.com/ebadiere/payments/bindings"
-	"github.com/ebadiere/payments/bindings/rewarder"
-	"github.com/ebadiere/payments/crypto"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
 )

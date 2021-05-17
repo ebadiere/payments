@@ -22,10 +22,10 @@ import (
 	"math/big"
 	"time"
 
+	"github.com/ebadiere/payments/uniswap/bindings"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/ebadiere/payments/uniswap/bindings"
 )
 
 // Client allows to do operations on uniswap smart contracts.
