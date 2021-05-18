@@ -1,7 +1,7 @@
 package uniswap
 
 import (
-	"encoding/hex"
+	"errors"
 
 	"github.com/ethereum/go-ethereum/common"
 )
@@ -16,18 +16,18 @@ type BaseCurrency struct {
 	isEther bool
 	isToken bool
 
-	decimals int
+	decimals uint
 	symbol   string
 	name     string
 }
 
 type Token struct {
 	baseCurrency BaseCurrency
-	chainID      int
+	chainID      uint
 	address      common.Address
 }
 
-func NewToken(chainId int, address string, decimals int, symbol string, name string) (*Token, error) {
+func NewToken(chainId uint, address common.Address, decimals uint, symbol string, name string) (*Token, error) {
 	base := BaseCurrency{
 		isEther:  false,
 		isToken:  true,
@@ -36,11 +36,26 @@ func NewToken(chainId int, address string, decimals int, symbol string, name str
 		name:     name,
 	}
 
-	_, err := hex.DecodeString(address)
+	if decimals > 255 {
+		return &Token{}, errors.New("DECIMALS")
+	}
 
 	return &Token{
 		baseCurrency: base,
 		chainID:      chainId,
-		address:      common.HexToAddress(address),
-	}, err
+		address:      address,
+	}, nil
+}
+
+/**
+* Returns true if the tokens have the same chainId and address
+*/
+func (t Token) Equals(u Token) bool {
+
+	if (t.address == u.address) && (t.chainID == u.chainID) {
+		return true
+	}
+
+	return false
+
 }
