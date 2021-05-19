@@ -49,7 +49,7 @@ func NewToken(chainId uint, address common.Address, decimals uint, symbol string
 
 /**
 * Returns true if the tokens have the same chainId and address
-*/
+ */
 func (t Token) Equals(u Token) bool {
 
 	if (t.address == u.address) && (t.chainID == u.chainID) {
