@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-func TestTwoHundredFiftySixDecimals(t *testing.T) {
+func TestTwoHundredFiftySixDecimalsFail(t *testing.T) {
 	address := common.HexToAddress("0x0000000000000000000000000000000000000002")
 	_, err := NewToken(Ropsten, address, 256, "dai", "dai")
 	if err == nil {
@@ -15,7 +15,7 @@ func TestTwoHundredFiftySixDecimals(t *testing.T) {
 	}
 }
 
-func TestTokenEqualsDifferentAddresses(t *testing.T) {
+func TestTokenEqualsDifferentAddressesFalse(t *testing.T) {
 
 	daiAddress := common.HexToAddress("0xad6d458402f60fd3bd25163575031acdce07538d")
 	testStandardToken := common.HexToAddress("0x722dd3F80BAC40c951b51BdD28Dd19d435762180")
@@ -41,7 +41,7 @@ func TestTokenEqualsDifferentAddresses(t *testing.T) {
 
 }
 
-func TestTokenEqualsDifferentNameSymbol(t *testing.T) {
+func TestTokenEqualsDifferentNameSymbolTrue(t *testing.T) {
 
 	daiAddress := common.HexToAddress("0xad6d458402f60fd3bd25163575031acdce07538d")
 	dai, err := NewToken(Ropsten, daiAddress, 18, "dai", "dai")
@@ -65,7 +65,7 @@ func TestTokenEqualsDifferentNameSymbol(t *testing.T) {
 
 }
 
-func TestTokenEqualsDifferentChainId(t *testing.T) {
+func TestTokenEqualsDifferentChainIdFalse(t *testing.T) {
 
 	daiAddress := common.HexToAddress("0xad6d458402f60fd3bd25163575031acdce07538d")
 	dai, err := NewToken(Ropsten, daiAddress, 18, "dai", "dai")
@@ -83,6 +83,30 @@ func TestTokenEqualsDifferentChainId(t *testing.T) {
 	}
 
 	if dai.Equals(*unkn) {
+		t.Logf("Failed equality test, %s", err)
+		t.Fail()
+	}
+
+}
+
+func TestTokenEqualsDifferentDecimalsTrue(t *testing.T) {
+
+	daiAddress := common.HexToAddress("0xad6d458402f60fd3bd25163575031acdce07538d")
+	dai, err := NewToken(Ropsten, daiAddress, 18, "dai", "dai")
+
+	if err != nil {
+		t.Logf("Failed to create Token, %s", err)
+		t.Fail()
+	}
+
+	unkn, err := NewToken(Ropsten, daiAddress, 10, "unkn", "unkn")
+
+	if err != nil {
+		t.Logf("Failed to create Token, %s", err)
+		t.Fail()
+	}
+
+	if !dai.Equals(*unkn) {
 		t.Logf("Failed equality test, %s", err)
 		t.Fail()
 	}
