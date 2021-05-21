@@ -112,3 +112,27 @@ func TestTokenEqualsDifferentDecimalsTrue(t *testing.T) {
 	}
 
 }
+
+func TestTokenEqualsSameAddressTrue(t *testing.T) {
+
+	daiAddress := common.HexToAddress("0xad6d458402f60fd3bd25163575031acdce07538d")
+	dai, err := NewToken(Ropsten, daiAddress, 18, "dai", "dai")
+
+	if err != nil {
+		t.Logf("Failed to create Token, %s", err)
+		t.Fail()
+	}
+
+	unkn, err := NewToken(Ropsten, daiAddress, 18, "unkn", "unkn")
+
+	if err != nil {
+		t.Logf("Failed to create Token, %s", err)
+		t.Fail()
+	}
+
+	if !dai.Equals(*unkn) {
+		t.Logf("Failed equality test, %s", err)
+		t.Fail()
+	}
+
+}
