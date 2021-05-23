@@ -253,6 +253,6 @@ func TestGetPathPairs(t *testing.T) {
 	}
 }
 
-func TestGetAmountOut(t *testing.T){
+func TestGetAmountOut(t *testing.T) {
 
 }
