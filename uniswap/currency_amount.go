@@ -3,7 +3,7 @@ package uniswap
 import "math/big"
 
 
-type CurrenyAmount struct {
+type CurrencyAmount struct {
 
 	currency 		Token
 	decimalScale	big.Int
@@ -20,13 +20,12 @@ var denominator 	big.Int
 var numerator 		big.Int
 var quotient 		big.Int
 
-type fraction struct{
+type Fraction struct{
 	numerator 		big.Int
 	denominator 	big.Int
 }
 
-
-func NewCurrencyAmount(_currency Token, fract fraction) CurrenyAmount {
+func NewCurrencyAmount(_currency Token, fract Fraction) CurrencyAmount {
 
 	denominator	:= fract.denominator
 
@@ -40,7 +39,7 @@ func NewCurrencyAmount(_currency Token, fract fraction) CurrenyAmount {
 	_decimals := big.NewInt( int64(_currency.baseCurrency.decimals))
 	decimalScale = *ten.Exp(ten, _decimals, nil)
 
-	currencyAmount := CurrenyAmount{
+	currencyAmount := CurrencyAmount{
 		currency: currency,
 		decimalScale: decimalScale,
 		numerator: fract.numerator,
@@ -56,6 +55,30 @@ func getQuotient(_numerator *big.Int, _denominator *big.Int) big.Int{
 	q := new(big.Int)
 	q.Div(_numerator, _denominator)
 	return *q
+}
+
+// create the multiple method
+func (currencyAmount CurrencyAmount) Multiply(percent Percent) (newCurencyAmount CurrencyAmount) {
+
+	// return currencyAmount.Multiply(percent)
+	var newNumerator = new(big.Int)
+	newNumerator.Mul(&currencyAmount.numerator, &percent.numerator)
+
+	var newDenominator = new(big.Int)
+	newDenominator.Mul(&currencyAmount.denominator, &percent.denominator)
+
+	var newQuotient = new(big.Int)
+	newQuotient.Div(newNumerator, newDenominator)
+
+	return CurrencyAmount {
+		currency: currencyAmount.currency,
+		numerator: *newNumerator,
+		denominator: *newDenominator,
+		decimalScale: currencyAmount.decimalScale,
+		quotient: *newQuotient,
+
+	}
+
 }
 
 
