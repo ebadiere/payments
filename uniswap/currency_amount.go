@@ -33,7 +33,7 @@ func NewCurrencyAmount(_currency Token, fract Fraction) CurrencyAmount {
 		denominator = *big.NewInt(1)
 	}
 
-	quotient = getQuotient(&numerator, &denominator)
+	quotient = getQuotient(&fract.numerator, &denominator)
 	currency = _currency
 	ten := big.NewInt(10)
 	_decimals := big.NewInt( int64(_currency.baseCurrency.decimals))
@@ -78,6 +78,7 @@ func (currencyAmount CurrencyAmount) Multiply(percent Percent) (newCurencyAmount
 		quotient: *newQuotient,
 
 	}
+
 
 }
 

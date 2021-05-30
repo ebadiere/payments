@@ -1,6 +1,7 @@
 package uniswap
 
 import (
+	"fmt"
 	"math/big"
 	"testing"
 
@@ -19,7 +20,8 @@ func TestCurrencyAmountTest(t *testing.T){
 	
 	f := Fraction{numerator: *big.NewInt(100)}
 	amount := NewCurrencyAmount(*token, f)
-	if amount.quotient.Cmp(big.NewInt(100)) == 0{
+	t.Log("Quotient: %", amount.quotient)
+	if amount.quotient.Cmp(big.NewInt(100)) != 0{
 		t.Errorf("Incorrect quotient")
 	}
 
@@ -50,5 +52,33 @@ func TestReturnsAmountAfterMultiplication(t *testing.T){
 	}
 
 }
+func TestProducesEtherAmount(t *testing.T){
+	ether, err := NewEther(Mainnet)
+	if err != nil {
+		t.Logf("Error creating Test token:, %s", err)
+		t.Fail()
+	}
 
+	f := Fraction{numerator: *big.NewInt(100)}
+
+	amount := NewCurrencyAmount(*ether, f)
+	expectedResult := *big.NewInt(100)
+
+	if amount.quotient.Cmp(&expectedResult) != 0 {
+		t.Logf("Error comparing quotient results:, %s", err)		
+		t.Logf("Expected expectedResult:, %s", &expectedResult)		
+		t.Logf("Actual result:, %s", &amount.quotient)
+		t.Fail()		
+	}
+
+	if amount.currency.chainID != ether.chainID {
+		t.Logf("Error comparing chainId results:, %s", err)		
+		t.Logf("Expected expectedResult:, %d", ether.chainID)		
+		t.Logf("Actual result:, %d", &amount.currency.chainID)
+		t.Fail()		
+	}	
+
+	fmt.Println(amount)
+
+}
 

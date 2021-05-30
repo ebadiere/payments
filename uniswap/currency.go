@@ -12,7 +12,7 @@ var currencyMap map[string]interface{}
 func NewCurrency(chainId uint, param ...string) (*Token, error) {
 
 	if len(param) == 1 {
-		return NewEther(chainId)
+		return NewNativeCurrency(chainId, 18, "ETH", "Ether")
 	}
 
 	if len(param) != 5 {
@@ -29,17 +29,17 @@ func NewCurrency(chainId uint, param ...string) (*Token, error) {
 	symbol := param[3]
 	name := param[4]
 
-	return NewToken(chainId, address, uint(decimals), symbol, name)
+	return NewToken(chainId, address, int(decimals), symbol, name)
 
 }
 
-func NewEther(chainId uint) (*Token, error) {
+func NewNativeCurrency(chainId uint, decimals int, symbol string, name string) (token *Token, err error) {
 	base := BaseCurrency{
 		isEther:  true,
 		isToken:  false,
-		decimals: 18,
-		symbol:   "ETH",
-		name:     "Ether",
+		decimals: decimals,
+		symbol:   symbol,
+		name:     name,
 	}
 
 	return &Token{

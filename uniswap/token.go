@@ -6,17 +6,12 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-const Mainnet = 1
-const Ropsten = 3
-const Rinkeby = 4
-const Gorli = 5
-const Kovan = 42
 
 type BaseCurrency struct {
 	isEther bool
 	isToken bool
 
-	decimals uint
+	decimals int
 	symbol   string
 	name     string
 }
@@ -27,7 +22,7 @@ type Token struct {
 	address      common.Address
 }
 
-func NewToken(chainId uint, address common.Address, decimals uint, symbol string, name string) (*Token, error) {
+func NewToken(chainId uint, address common.Address, decimals int, symbol string, name string) (*Token, error) {
 	base := BaseCurrency{
 		isEther:  false,
 		isToken:  true,
