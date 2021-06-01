@@ -1,7 +1,6 @@
 package uniswap
 
 import (
-	"fmt"
 	"math/big"
 	"testing"
 
@@ -9,6 +8,7 @@ import (
 )
 
 var addressOne = common.HexToAddress("0x0000000000000000000000000000000000000001")
+var maxUint256 = common.HexToAddress("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
 
 func TestCurrencyAmountTest(t *testing.T){
 
@@ -77,8 +77,21 @@ func TestProducesEtherAmount(t *testing.T){
 		t.Logf("Actual result:, %d", &amount.currency.chainID)
 		t.Fail()		
 	}	
+}
 
-	fmt.Println(amount)
+func TestAmountCanBeMaxUint256(t *testing.T){
+	token, err := NewToken(Mainnet, addressOne, 18, "tst", "Test")
+	if err != nil {
+		t.Logf("Error creating Test token:, %s", err)
+		t.Fail()
+	}
+	
+	f := Fraction{numerator: *big.NewInt(maxUint256.Hash().Big().Int64())}
+	amount := NewCurrencyAmount(*token, f)
+	t.Log("Quotient: %", amount.quotient)
+	if amount.quotient.Cmp(big.NewInt(maxUint256.Hash().Big().Int64())) != 0{
+		t.Errorf("Incorrect quotient")
+	}
 
 }
 
