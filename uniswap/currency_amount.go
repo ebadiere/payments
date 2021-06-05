@@ -1,6 +1,11 @@
 package uniswap
 
-import "math/big"
+import (
+	"errors"
+	"math/big"
+
+	"github.com/ethereum/go-ethereum/common"
+)
 
 
 type CurrencyAmount struct {
@@ -25,7 +30,9 @@ type Fraction struct{
 	denominator 	big.Int
 }
 
-func NewCurrencyAmount(_currency Token, fract Fraction) CurrencyAmount {
+var maxUint256 = common.HexToAddress("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+
+func NewCurrencyAmount(_currency Token, fract Fraction) (CurrencyAmount, error) {
 
 	denominator	:= fract.denominator
 
@@ -34,6 +41,10 @@ func NewCurrencyAmount(_currency Token, fract Fraction) CurrencyAmount {
 	}
 
 	quotient = getQuotient(&fract.numerator, &denominator)
+	if quotient.Cmp(maxUint256.Hash().Big()) == 1{
+		return CurrencyAmount{}, errors.New("Amount exceeds max uint256")
+	}
+
 	currency = _currency
 	ten := big.NewInt(10)
 	_decimals := big.NewInt( int64(_currency.baseCurrency.decimals))
@@ -47,7 +58,7 @@ func NewCurrencyAmount(_currency Token, fract Fraction) CurrencyAmount {
 		quotient: quotient,
 	}
 
-	return currencyAmount
+	return currencyAmount, nil
 }
 
 func getQuotient(_numerator *big.Int, _denominator *big.Int) big.Int{

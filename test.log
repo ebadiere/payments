@@ -1,0 +1,194 @@
+?   	github.com/ebadiere/payments	[no test files]
+?   	github.com/ebadiere/payments/bindings	[no test files]
+?   	github.com/ebadiere/payments/bindings/abi	[no test files]
+?   	github.com/ebadiere/payments/bindings/matic	[no test files]
+?   	github.com/ebadiere/payments/bindings/rewarder	[no test files]
+=== RUN   TestReconnectableEthClientCreatesNewClient
+--- PASS: TestReconnectableEthClientCreatesNewClient (0.00s)
+PASS
+ok  	github.com/ebadiere/payments/client	(cached)
+=== RUN   TestDeriveCreate2Address
+--- PASS: TestDeriveCreate2Address (0.00s)
+=== RUN   TestGenerateChannelAddress
+--- PASS: TestGenerateChannelAddress (0.00s)
+=== RUN   TestGenerateProviderChannelID
+--- PASS: TestGenerateProviderChannelID (0.00s)
+=== RUN   TestGenerateProviderChannelIDBytes
+--- PASS: TestGenerateProviderChannelIDBytes (0.00s)
+=== RUN   TestBigMystToFloat
+=== RUN   TestBigMystToFloat/calculates_a_single_myst_correctly
+=== RUN   TestBigMystToFloat/calculates_half_a_myst
+=== RUN   TestBigMystToFloat/calculates_a_small_amount_of_a_myst
+--- PASS: TestBigMystToFloat (0.00s)
+    --- PASS: TestBigMystToFloat/calculates_a_single_myst_correctly (0.00s)
+    --- PASS: TestBigMystToFloat/calculates_half_a_myst (0.00s)
+    --- PASS: TestBigMystToFloat/calculates_a_small_amount_of_a_myst (0.00s)
+=== RUN   TestFloatToBigMyst
+=== RUN   TestFloatToBigMyst/calculates_a_single_myst_correctly
+=== RUN   TestFloatToBigMyst/calculates_half_a_myst
+=== RUN   TestFloatToBigMyst/calculates_a_small_amount_of_a_myst
+--- PASS: TestFloatToBigMyst (0.00s)
+    --- PASS: TestFloatToBigMyst/calculates_a_single_myst_correctly (0.00s)
+    --- PASS: TestFloatToBigMyst/calculates_half_a_myst (0.00s)
+    --- PASS: TestFloatToBigMyst/calculates_a_small_amount_of_a_myst (0.00s)
+=== RUN   TestGetMessageHash
+--- PASS: TestGetMessageHash (0.00s)
+=== RUN   TestRecoverConsumerIdentity
+--- PASS: TestRecoverConsumerIdentity (0.00s)
+=== RUN   TestExchangeMessageValidation
+--- PASS: TestExchangeMessageValidation (0.00s)
+=== RUN   TestCreateExchangeMessage
+--- PASS: TestCreateExchangeMessage (0.00s)
+=== RUN   TestGetHash
+--- PASS: TestGetHash (0.00s)
+=== RUN   TestGetSignatureHex
+--- PASS: TestGetSignatureHex (0.00s)
+=== RUN   TestCreateConsumerSignature
+--- PASS: TestCreateConsumerSignature (0.00s)
+=== RUN   TestCreateProviderSignature
+--- PASS: TestCreateProviderSignature (0.00s)
+=== RUN   TestConsumerPromiseValidation
+--- PASS: TestConsumerPromiseValidation (0.00s)
+=== RUN   TestProviderPromiseValidation
+--- PASS: TestProviderPromiseValidation (0.00s)
+=== RUN   TestRecoverSigner
+--- PASS: TestRecoverSigner (0.00s)
+=== RUN   TestValidationAndRecoveryImmutability
+--- PASS: TestValidationAndRecoveryImmutability (0.00s)
+=== RUN   TestCreatePromise
+--- PASS: TestCreatePromise (0.00s)
+=== RUN   TestNewPromise
+--- PASS: TestNewPromise (0.00s)
+=== RUN   TestSign
+--- PASS: TestSign (0.00s)
+=== RUN   TestReferralRequest
+--- PASS: TestReferralRequest (0.00s)
+PASS
+ok  	github.com/ebadiere/payments/crypto	(cached)
+=== RUN   TestGasPriceIncrementor
+=== RUN   TestGasPriceIncrementor/gas_price_is_increased_and_tx_is_successfull
+=== RUN   TestGasPriceIncrementor/tx_already_mined
+=== RUN   TestGasPriceIncrementor/tx_fails_if_gas_price_is_too_big
+=== RUN   TestGasPriceIncrementor/invalid_opts,_not_inserted
+--- PASS: TestGasPriceIncrementor (0.27s)
+    --- PASS: TestGasPriceIncrementor/gas_price_is_increased_and_tx_is_successfull (0.09s)
+    --- PASS: TestGasPriceIncrementor/tx_already_mined (0.05s)
+    --- PASS: TestGasPriceIncrementor/tx_fails_if_gas_price_is_too_big (0.13s)
+    --- PASS: TestGasPriceIncrementor/invalid_opts,_not_inserted (0.00s)
+=== RUN   Test_syncer
+--- PASS: Test_syncer (0.00s)
+=== RUN   TestGasPriceIncremenetor_isBlockchainErrorUnhandleable
+=== RUN   TestGasPriceIncremenetor_isBlockchainErrorUnhandleable/detects_ethereum_not_found_error
+=== RUN   TestGasPriceIncremenetor_isBlockchainErrorUnhandleable/detects_core_nonce_too_low_error
+=== RUN   TestGasPriceIncremenetor_isBlockchainErrorUnhandleable/detects_nonce_too_low_by_string
+--- PASS: TestGasPriceIncremenetor_isBlockchainErrorUnhandleable (0.00s)
+    --- PASS: TestGasPriceIncremenetor_isBlockchainErrorUnhandleable/detects_ethereum_not_found_error (0.00s)
+    --- PASS: TestGasPriceIncremenetor_isBlockchainErrorUnhandleable/detects_core_nonce_too_low_error (0.00s)
+    --- PASS: TestGasPriceIncremenetor_isBlockchainErrorUnhandleable/detects_nonce_too_low_by_string (0.00s)
+PASS
+ok  	github.com/ebadiere/payments/fees	(cached)
+=== RUN   TestCalculateTreeHeight
+--- PASS: TestCalculateTreeHeight (0.00s)
+=== RUN   TestCeilLogBaseTwo
+--- PASS: TestCeilLogBaseTwo (0.00s)
+=== RUN   TestLogBaseTwo
+--- PASS: TestLogBaseTwo (0.00s)
+=== RUN   TestCalculateNodeCount
+--- PASS: TestCalculateNodeCount (0.00s)
+=== RUN   TestNextPowerOfTwo
+--- PASS: TestNextPowerOfTwo (0.00s)
+=== RUN   TestIsPowerOfTwo
+--- PASS: TestIsPowerOfTwo (0.00s)
+=== RUN   TestNewNode
+--- PASS: TestNewNode (0.00s)
+=== RUN   TestNewTree
+--- PASS: TestNewTree (0.00s)
+=== RUN   TestNewTreeWithOpts
+--- PASS: TestNewTreeWithOpts (0.00s)
+=== RUN   TestTreeUngenerated
+--- PASS: TestTreeUngenerated (0.00s)
+=== RUN   TestTreeGenerate
+--- PASS: TestTreeGenerate (0.00s)
+=== RUN   TestTree_GenerateSingleLeaf
+--- PASS: TestTree_GenerateSingleLeaf (0.00s)
+=== RUN   TestTreeGenerate_DisableHashLeaves
+--- PASS: TestTreeGenerate_DisableHashLeaves (0.00s)
+=== RUN   TestGenerateNodeHashOfUnbalance
+--- PASS: TestGenerateNodeHashOfUnbalance (0.00s)
+=== RUN   TestGenerateNodeHashOrdered
+--- PASS: TestGenerateNodeHashOrdered (0.00s)
+=== RUN   TestGenerateNodeHashStandard
+--- PASS: TestGenerateNodeHashStandard (0.00s)
+=== RUN   TestHashOrderedTreeGenerate
+--- PASS: TestHashOrderedTreeGenerate (0.00s)
+=== RUN   TestTreeGenerateProof
+--- PASS: TestTreeGenerateProof (0.00s)
+=== RUN   TestGenerateFailedHash
+--- PASS: TestGenerateFailedHash (0.00s)
+=== RUN   TestGetNodesAtHeight
+--- PASS: TestGetNodesAtHeight (0.00s)
+=== RUN   TestRootHashValue
+--- PASS: TestRootHashValue (0.00s)
+PASS
+ok  	github.com/ebadiere/payments/merkle	(cached)
+?   	github.com/ebadiere/payments/registration	[no test files]
+=== RUN   TestCurrencyAmountTest
+    currency_amount_test.go:27: Quotient: % {false [100]}
+--- PASS: TestCurrencyAmountTest (0.00s)
+=== RUN   TestReturnsAmountAfterMultiplication
+--- PASS: TestReturnsAmountAfterMultiplication (0.00s)
+=== RUN   TestProducesEtherAmount
+--- PASS: TestProducesEtherAmount (0.00s)
+=== RUN   TestAmountCanBeMaxUint256
+    currency_amount_test.go:109: Quotient: % {true [1]}
+--- PASS: TestAmountCanBeMaxUint256 (0.00s)
+=== RUN   TestAmountCannotExceedUint256
+    currency_amount_test.go:132: Quotient: % {false []}
+--- PASS: TestAmountCannotExceedUint256 (0.00s)
+=== RUN   TestGeneratePairAddress
+=== RUN   TestGeneratePairAddress/calculate_address_correctly_if_addresses_sorted
+=== RUN   TestGeneratePairAddress/calculate_address_correctly_if_addresses_are_not_sorted
+--- PASS: TestGeneratePairAddress (0.00s)
+    --- PASS: TestGeneratePairAddress/calculate_address_correctly_if_addresses_sorted (0.00s)
+    --- PASS: TestGeneratePairAddress/calculate_address_correctly_if_addresses_are_not_sorted (0.00s)
+=== RUN   Test_sortAddressess
+--- PASS: Test_sortAddressess (0.00s)
+=== RUN   TestQuote
+=== RUN   TestQuote/calculates_the_quote_correctly_1
+=== RUN   TestQuote/calculates_the_quote_correctly_2
+=== RUN   TestQuote/calculates_the_quote_correctly_3
+=== RUN   TestQuote/calculates_the_quote_correctly_4
+--- PASS: TestQuote (0.00s)
+    --- PASS: TestQuote/calculates_the_quote_correctly_1 (0.00s)
+    --- PASS: TestQuote/calculates_the_quote_correctly_2 (0.00s)
+    --- PASS: TestQuote/calculates_the_quote_correctly_3 (0.00s)
+    --- PASS: TestQuote/calculates_the_quote_correctly_4 (0.00s)
+=== RUN   TestGetPathPairs
+=== RUN   TestGetPathPairs/no_pairs_if_single_address
+=== RUN   TestGetPathPairs/no_pairs_no_addresses
+=== RUN   TestGetPathPairs/single_pair_if_two_addresses
+=== RUN   TestGetPathPairs/two_pair_if_three_addresses
+=== RUN   TestGetPathPairs/three_pair_if_four_addresses
+--- PASS: TestGetPathPairs (0.00s)
+    --- PASS: TestGetPathPairs/no_pairs_if_single_address (0.00s)
+    --- PASS: TestGetPathPairs/no_pairs_no_addresses (0.00s)
+    --- PASS: TestGetPathPairs/single_pair_if_two_addresses (0.00s)
+    --- PASS: TestGetPathPairs/two_pair_if_three_addresses (0.00s)
+    --- PASS: TestGetPathPairs/three_pair_if_four_addresses (0.00s)
+=== RUN   TestGetAmountOut
+--- PASS: TestGetAmountOut (0.00s)
+=== RUN   TestTwoHundredFiftySixDecimalsFail
+--- PASS: TestTwoHundredFiftySixDecimalsFail (0.00s)
+=== RUN   TestTokenEqualsDifferentAddressesFalse
+--- PASS: TestTokenEqualsDifferentAddressesFalse (0.00s)
+=== RUN   TestTokenEqualsDifferentNameSymbolTrue
+--- PASS: TestTokenEqualsDifferentNameSymbolTrue (0.00s)
+=== RUN   TestTokenEqualsDifferentChainIdFalse
+--- PASS: TestTokenEqualsDifferentChainIdFalse (0.00s)
+=== RUN   TestTokenEqualsDifferentDecimalsTrue
+--- PASS: TestTokenEqualsDifferentDecimalsTrue (0.00s)
+=== RUN   TestTokenEqualsSameAddressTrue
+--- PASS: TestTokenEqualsSameAddressTrue (0.00s)
+PASS
+ok  	github.com/ebadiere/payments/uniswap	0.028s
+?   	github.com/ebadiere/payments/uniswap/bindings	[no test files]
