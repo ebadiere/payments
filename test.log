@@ -145,6 +145,10 @@ ok  	github.com/ebadiere/payments/merkle	(cached)
 === RUN   TestAmountCannotExceedUint256
     currency_amount_test.go:132: Quotient: % {false []}
 --- PASS: TestAmountCannotExceedUint256 (0.00s)
+=== RUN   TestNumeratorCanBeGTIfDenominatorGTOne
+    currency_amount_test.go:152: Error creating CurrencyAmount:, %!s(<nil>)
+    currency_amount_test.go:156: Quotient: % {false []}
+--- FAIL: TestNumeratorCanBeGTIfDenominatorGTOne (0.00s)
 === RUN   TestGeneratePairAddress
 === RUN   TestGeneratePairAddress/calculate_address_correctly_if_addresses_sorted
 === RUN   TestGeneratePairAddress/calculate_address_correctly_if_addresses_are_not_sorted
@@ -189,6 +193,7 @@ ok  	github.com/ebadiere/payments/merkle	(cached)
 --- PASS: TestTokenEqualsDifferentDecimalsTrue (0.00s)
 === RUN   TestTokenEqualsSameAddressTrue
 --- PASS: TestTokenEqualsSameAddressTrue (0.00s)
-PASS
-ok  	github.com/ebadiere/payments/uniswap	0.028s
+FAIL
+FAIL	github.com/ebadiere/payments/uniswap	0.026s
 ?   	github.com/ebadiere/payments/uniswap/bindings	[no test files]
+FAIL
