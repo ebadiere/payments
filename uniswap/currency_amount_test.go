@@ -99,8 +99,15 @@ func TestAmountCanBeMaxUint256(t *testing.T){
 		t.Logf("Error creating CurrencyAmount:, %s", err)
 		t.Fail()
 	}
+
+	numerator, err := hexutil.DecodeBig("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+	if err != nil {
+		t.Logf("Error creating max uint256 value:, %s", err)
+		t.Fail()
+	}
+
 	
-	f := Fraction{numerator: *big.NewInt(maxUint256.Hash().Big().Int64())}
+	f := Fraction{numerator: *numerator}
 	amount, err := NewCurrencyAmount(*token, f)
 	if err != nil {
 		t.Logf("Error creating CurrencyAmount:, %s", err)
@@ -108,7 +115,14 @@ func TestAmountCanBeMaxUint256(t *testing.T){
 	}	
 
 	t.Log("Quotient: %", amount.quotient)
-	if amount.quotient.Cmp(big.NewInt(maxUint256.Hash().Big().Int64())) != 0{
+
+	max256, err := hexutil.DecodeBig("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+	if err != nil {
+		t.Logf("Error creating max uint256 value:, %s", err)
+		t.Fail()
+	}
+
+	if amount.quotient.Cmp(max256) != 0{
 		t.Errorf("Incorrect quotient")
 	}
 }
@@ -125,8 +139,6 @@ func TestAmountCannotExceedUint256(t *testing.T){
 		t.Logf("Error creating max uint256 value:, %s", err)
 		t.Fail()
 	}
-
-	// numerator := big.NewInt(maxUint256.Hash().Big().Int64())
 
 	numerator = numerator.Add(numerator, big.NewInt(1))
 
@@ -147,9 +159,12 @@ func TestNumeratorCanBeGTIfDenominatorGTOne(t *testing.T){
 		t.Fail()
 	}
 
-	numerator := big.NewInt(maxUint256.Hash().Big().Int64())
+	numerator, err := hexutil.DecodeBig("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+	if err != nil {
+		t.Logf("Error creating max uint256 value:, %s", err)
+		t.Fail()
+	}
 
-	numerator = numerator.Add(numerator, big.NewInt(2))
 	denominator := big.NewInt(2)
 
 	f := Fraction{numerator: *numerator, denominator: *denominator}
@@ -164,3 +179,27 @@ func TestNumeratorCanBeGTIfDenominatorGTOne(t *testing.T){
 
 }
 
+// func TestFailsWhenDecimalsGTCurrencyDecimai(t *testing.T){
+
+// 	token, err := NewToken(Mainnet, addressOne, 18, "tst", "Test")
+// 	if err != nil {
+// 		t.Logf("Error creating CurrencyAmount:, %s", err)
+// 		t.Fail()
+// 	}
+
+// 	numerator := big.NewInt(maxUint256.Hash().Big().Int64())
+
+// 	numerator = numerator.Add(numerator, big.NewInt(2))
+// 	denominator := big.NewInt(2)
+
+// 	f := Fraction{numerator: *numerator, denominator: *denominator}
+
+// 	amount, err := NewCurrencyAmount(*token, f)
+// 	if err != nil {
+// 		t.Logf("Error creating CurrencyAmount:, %s", err)
+// 		t.Fail()
+// 	}
+
+// 	t.Log("Quotient: %", amount.quotient)
+
+// }

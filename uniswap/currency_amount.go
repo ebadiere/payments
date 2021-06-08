@@ -1,10 +1,11 @@
 package uniswap
 
 import (
-	"errors"
+	
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 )
 
 
@@ -41,8 +42,10 @@ func NewCurrencyAmount(_currency Token, fract Fraction) (CurrencyAmount, error) 
 	}
 
 	quotient = getQuotient(&fract.numerator, &denominator)
-	if quotient.Cmp(maxUint256.Hash().Big()) == 1{
-		return CurrencyAmount{}, errors.New("Amount exceeds max uint256")
+	quotientStr := quotient.Text(16)
+	_, err := hexutil.DecodeBig("0x" + quotientStr)
+	if err != nil{
+		return CurrencyAmount{}, err
 	}
 
 	currency = _currency
