@@ -179,27 +179,28 @@ func TestNumeratorCanBeGTIfDenominatorGTOne(t *testing.T){
 
 }
 
-// func TestFailsWhenDecimalsGTCurrencyDecimai(t *testing.T){
+func TestFailsWhenDecimalsGTCurrencyDecimals(t *testing.T){
 
-// 	token, err := NewToken(Mainnet, addressOne, 18, "tst", "Test")
-// 	if err != nil {
-// 		t.Logf("Error creating CurrencyAmount:, %s", err)
-// 		t.Fail()
-// 	}
+	token, err := NewToken(Mainnet, addressOne, 18, "tst", "Test")
+	if err != nil {
+		t.Logf("Error creating CurrencyAmount:, %s", err)
+		t.Fail()
+	}
 
-// 	numerator := big.NewInt(maxUint256.Hash().Big().Int64())
+	numerator := big.NewInt(1000)
+	if err != nil {
+		t.Logf("Error creating max uint256 value:, %s", err)
+		t.Fail()
+	}
 
-// 	numerator = numerator.Add(numerator, big.NewInt(2))
-// 	denominator := big.NewInt(2)
+ 	f := Fraction{numerator: *numerator}
 
-// 	f := Fraction{numerator: *numerator, denominator: *denominator}
+	amount, err := NewCurrencyAmount(*token, f)
+	if err != nil {
+		t.Logf("Error creating CurrencyAmount:, %s", err)
+		t.Fail()
+	}
 
-// 	amount, err := NewCurrencyAmount(*token, f)
-// 	if err != nil {
-// 		t.Logf("Error creating CurrencyAmount:, %s", err)
-// 		t.Fail()
-// 	}
+	t.Log("Quotient: %", amount.quotient)
 
-// 	t.Log("Quotient: %", amount.quotient)
-
-// }
+}
